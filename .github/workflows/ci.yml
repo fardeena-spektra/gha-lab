@@ -65,3 +65,7 @@ jobs:
 
       - name: Run tests
         run: pytest
+
+      - name: Notify on main only
+        if: github.ref == 'refs/heads/main'
+        run: echo "This step only runs when pushing to main."
