@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -31,7 +34,7 @@ jobs:
       - name: Upload build report
         uses: actions/upload-artifact@v4
         with:
-          name: build-report
+          name: build-report-${{ matrix.python-version }}
           path: build-report.txt
 
   test:
@@ -55,7 +58,7 @@ jobs:
       - name: Download build report
         uses: actions/download-artifact@v4
         with:
-          name: build-report
+          name: build-report-3.11
 
       - name: Show build report
         run: cat build-report.txt
